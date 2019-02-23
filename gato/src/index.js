@@ -1,7 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import styled, { css } from 'styled-components'
 
+const Button = styled.button`
+  background: transparent;
+  border-radius: 3px;
+  border: 2px solid palevioletred;
+  color: palevioletred;
+  margin: 0 1em;
+  padding: 0.25em 1em;
+
+  ${props =>
+      props.primary &&  css`
+        background: palevioletred;
+        color: white;
+        padding: 0em 1em;
+        margin: 0.25 1em;
+        border-radius: 3px;
+        border: 2px solid white;
+
+      `};
+`;
 function Square(props) {
   return (
     <button className="square" onClick={props.onClick}>
@@ -89,12 +109,15 @@ class Game extends React.Component {
     const winner = calculateWinner(current.squares);
 
     const moves = history.map((step, move) => {
+      console.log("step ----> ", step);
+      console.log("move ----->", move);
       const desc = move ?
         'Go to move #' + move :
         'Go to game start';
+
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <Button primary={move% 2  ? true : false} onClick={() => this.jumpTo(move)}>{desc}</Button>
         </li>
       );
     });
