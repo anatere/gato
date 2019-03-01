@@ -12,30 +12,22 @@ class Game extends React.Component {
         num2: '',
         num3: '',
         result: '',
-        result2: '',
-        result3: ''
       }
         this.handleComparativa = this.handleComparativa.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
 }
-handleComparativa(num1, num2, num3 ){
+handleComparativa({num1, num2, num3} ){
   var  result, result2, result3
         result= (num1>num3) ? num1 : num3;
         result2 = (num2>num3) ? num2 : num3;
         return result3 = (result<result2) ? result : result2;
-
   }
   handleSubmit(e) {
    e.preventDefault();
-  // this.props.onAddTodo(this.state);
+   var resultadofinal = this.handleComparativa(this.state)
    this.setState({
-     num1: '',
-     num2: '',
-     num3: '',
-     result: '',
-     result2: '',
-     result3: '',
+     result: resultadofinal,
    });
 }
 handleInputChange(e) {
@@ -86,8 +78,8 @@ handleInputChange(e) {
       <h4> Resultado </h4>
       <input
         type="text"
-        name="result3"
-        value={this.state.result3}
+        name="result"
+        value={this.state.result}
 
         />
       </form>
