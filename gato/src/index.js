@@ -58,16 +58,16 @@ handleDia(e)
 
     console.log("valor-->",this.state.num1);
     var valorInputDate = this.state.num1;
-    var result = new Date(valorInputDate).value;
-    // var res = result.split("-");
-    // var num1= res[2]+"-"+res[1]+"-"+res[0];
-   console.log("result-->",result);
+    var result = new Date(valorInputDate);
+   //  var res = result.split("-");
+   //  var num1= res[2]+"-"+res[1]+"-"+res[0];
+   // console.log("result-->",result);
 
 
-    // var days = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
-    // var daysw = days[result.getDay()];
-    // console.log("el dia es:--->",daysw);
-    //
+    var days = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+    var daysw = days[result.getDay()];
+    console.log("el dia es:--->",daysw);
+
     var start = new Date(result.getFullYear(), 0, 0);
     var diff = result - start;
     var oneDay = 1000 * 60 * 60 * 24;
@@ -106,11 +106,8 @@ handleInputChange(e) {
       [name]: value
     });
 }
-
   render(){
-
     return (
-
     <div>
       <form onSubmit={this.handleDia}>
       <Title>
