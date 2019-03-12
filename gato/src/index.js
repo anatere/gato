@@ -3,6 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import styled, {css}from 'styled-components'
 
+const Button = styled.button`
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 3px;
+`;
+
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -18,24 +26,32 @@ class Game extends React.Component {
 
 
     //console.log("evento-->",e);
-     console.log("target o input--->",e.target.value);
+  //   console.log("target o input--->",e.target.value);
      var abecedario = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q',
       'R','S','T','U','V','W','X','Y','Z',e.keyUp==26];
+      var palabra = e.target.value.split('');
+    //  console.log(palabra);
+      palabra.forEach((element) => {
+      console.log(element);
 
-     abecedario.forEach((element, index)=> {
+      });
+
+
+     abecedario.forEach((element, index) =>  {
 
        if(e.target.value == element){
-        console.log("primer validacion-->");
+        //console.log("primer validacion-->");
          if(index==26) {
            this.setState({
              result:abecedario[0]
            })
+
         console.log("segunda validacion-->");
           console.log(abecedario[0]);
          return
        }
           this.setState({
-            result:abecedario[index+1]
+            result:abecedario[element]
           });
           console.log(abecedario[index+1]);
      }
@@ -45,7 +61,7 @@ class Game extends React.Component {
      //
      // }
 
-     });
+   });
 
 
 
@@ -74,6 +90,10 @@ class Game extends React.Component {
     return (
       <div>
       <textarea value={this.state.result} onChange={this.handleComparativa} name="texto">  </textarea>
+
+      <Button type="submit">
+        Resultado
+      </Button>
       </div>
     );
   }
