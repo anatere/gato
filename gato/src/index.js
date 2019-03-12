@@ -3,21 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import styled, {css}from 'styled-components'
 
-
-const Title = styled.h1`
-  font-size: 1.7em;
-  text-align: center;
-  color: palevioletred;
-`;
-
-const Button = styled.button`
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  background: #D5B1D0;
-  border: 5px solid palevioletred;
-  border-radius: 3px;
-`;
+// 
+// const Title = styled.h1`
+//   font-size: 1.7em;
+//   text-align: center;
+//   color: palevioletred;
+// `;
+//
+// const Button = styled.button`
+//   font-size: 1em;
+//   margin: 1em;
+//   padding: 0.25em 1em;
+//   background: #D5B1D0;
+//   border: 5px solid palevioletred;
+//   border-radius: 3px;
+// `;
 
 const Input = styled.input.attrs(({ size }) => ({
   margin: size || "1em",
