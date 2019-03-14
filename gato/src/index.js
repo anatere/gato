@@ -36,9 +36,12 @@ class Game extends React.Component {
    handleTexto(e){
      e.preventDefault();
      var cadena=this.state.cadena;
+     console.log("cadena-->",cadena);
+     var palabra = cadena.split(" ");
+     console.log(palabra);
      var letra=this.state.letra;
      console.log("letra-->",letra);
-     var indices = [];
+     var indices = [e];
      for(var i = 0; i < cadena.length; i++) {
   	 if (cadena[i].toLowerCase() === letra) indices.push(i);
 
