@@ -3,12 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import styled, {css}from 'styled-components'
 
-const Title = styled.h1`
-  font-size: 2.7em;
-  text-align: center;
-  color: palevioletred;
-`;
-
 const Button = styled.button`
   font-size: 1em;
   margin: 1em;
@@ -17,57 +11,55 @@ const Button = styled.button`
   border-radius: 3px;
 `;
 
+const Input = styled.input.attrs(({ size }) => ({
+  margin: size || "1em",
+  padding: size || "1em"
+}))`
+  color:black ;
+  font-size: 1em;
+  border: 2px solid orange;
+  border-radius: 3px;
+`;
+
 class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
     result:'',
-    li:''
+    cadena:'',
+    letra:''
    }
-   this.handleComparativa = this.handleComparativa.bind(this);
+   this.handleTexto = this.handleTexto.bind(this);
+   this.handleInputChange = this.handleInputChange.bind(this);
  }
 
-   handleComparativa(e,result){
-
-     var abecedario = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q',
-      'R','S','T','U','V','W','X','Y','Z',e.keyUp==26,'  '];
-     var palabra = e.target.value.split("");
-        console.log("p-->",palabra);
-     var resultadoFinal='';
-     var espacio="";
-        palabra.forEach((letra) =>{
-
-      abecedario.forEach((element, index)=> {
-
-
-       if(letra == element){
-
-         console.log("primer validacion-->");
-          if(index==26) {
-          resultadoFinal += abecedario[0]
-            this.setState ({
-              li:resultadoFinal
-          })
-
-         // console.log("segunda validacion-->");
-         //   console.log(abecedario[0]);
-         return
-        }
-           resultadoFinal  += abecedario[index+1]
-            this.setState({
-              result:e.onChange,
-              l1:resultadoFinal
-          });
-
-          console.log(abecedario[index-1]);
+   handleTexto(e){
+     e.preventDefault();
+     var cadena=this.state.cadena;
+     var letra=this.state.letra;
+     console.log("letra-->",letra);
+     var indices = [];
+     for(var i = 0; i < cadena.length; i++) {
+  	 if (cadena[i].toLowerCase() === letra) indices.push(i);
 
      }
+     console.log("indices-->",indices.length);
+     var resultadoFinal = indices.length;
 
-       });
 
-     });
-
+    this.setState({
+    result: resultadoFinal
+    })
    }
+
+   handleInputChange(e) {
+      e.preventDefault();
+       const {value, name} = e.target;
+       // console.log(value, name);
+       this.setState({
+         [name]: value
+       });
+     }
 
 
   render() {
@@ -76,19 +68,30 @@ class Game extends React.Component {
       <form >
         <div>
           <textarea
-          value={this.state.result}
-          onChange={this.handleComparativa}
+          value={this.state.cadena}
+          onChange={this.handleInputChange}
           id="textareabox"
-          name="textarea1"
-          placeholder="Start here...">
+          name="cadena"
+          placeholder="Escribe aqui">
           </textarea>
 
-
-          <input
+          <Input
             type="text"
-            name="num3"
-            value={this.state.l1}
-            onChange={this.handleComparativa}
+            name="letra"
+            value={this.state.letra}
+            onChange={this.handleInputChange}
+            />
+
+          <Button
+          name="contar"
+          onClick={this.handleTexto} >
+          Contar
+          </Button>
+
+          <Input
+            type="text"
+            name="result"
+            value={this.state.result}
             />
 
         </div>
